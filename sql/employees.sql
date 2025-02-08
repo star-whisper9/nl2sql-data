@@ -83,9 +83,9 @@ CREATE TABLE `employees` (
 DROP TABLE IF EXISTS `salaries`;
 CREATE TABLE `salaries` (
   `emp_no` int NOT NULL, -- 员工编号列
-  `salary` int NOT NULL, -- 薪资列
-  `from_date` date NOT NULL, -- 薪资周期起始日期列
-  `to_date` date NOT NULL, -- 薪资周期结束日期列
+  `salary` int NOT NULL, -- 合同期内年薪列
+  `from_date` date NOT NULL, -- 合同起始日期列
+  `to_date` date NOT NULL, -- 合同结束日期列
   PRIMARY KEY (`emp_no`,`from_date`),
   CONSTRAINT `salaries_ibfk_1` FOREIGN KEY (`emp_no`) REFERENCES `employees` (`emp_no`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
