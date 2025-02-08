@@ -38,7 +38,7 @@ CREATE TABLE `dept_emp` (
   `emp_no` int NOT NULL, -- 员工编号列
   `dept_no` char(4) NOT NULL, -- 部门编号列
   `from_date` date NOT NULL, -- 入职日期列
-  `to_date` date NOT NULL, -- 合同终止日期列
+  `to_date` date NOT NULL, -- 离职日期列，若为9999-01-01则表示仍然在职
   PRIMARY KEY (`emp_no`,`dept_no`),
   KEY `dept_no` (`dept_no`),
   CONSTRAINT `dept_emp_ibfk_1` FOREIGN KEY (`emp_no`) REFERENCES `employees` (`emp_no`) ON DELETE CASCADE,
@@ -54,7 +54,7 @@ CREATE TABLE `dept_manager` (
   `emp_no` int NOT NULL, -- 员工编号列
   `dept_no` char(4) NOT NULL, -- 部门编号列
   `from_date` date NOT NULL, -- 任职日期列
-  `to_date` date NOT NULL, -- 离职日期列
+  `to_date` date NOT NULL, -- 离职日期列，若为9999-01-01则表示仍然在职
   PRIMARY KEY (`emp_no`,`dept_no`),
   KEY `dept_no` (`dept_no`),
   CONSTRAINT `dept_manager_ibfk_1` FOREIGN KEY (`emp_no`) REFERENCES `employees` (`emp_no`) ON DELETE CASCADE,
@@ -85,7 +85,7 @@ CREATE TABLE `salaries` (
   `emp_no` int NOT NULL, -- 员工编号列
   `salary` int NOT NULL, -- 合同期内年薪列
   `from_date` date NOT NULL, -- 合同起始日期列
-  `to_date` date NOT NULL, -- 合同结束日期列
+  `to_date` date NOT NULL, -- 合同结束日期列，若为9999-01-01则表示合同仍在生效
   PRIMARY KEY (`emp_no`,`from_date`),
   CONSTRAINT `salaries_ibfk_1` FOREIGN KEY (`emp_no`) REFERENCES `employees` (`emp_no`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -99,7 +99,7 @@ CREATE TABLE `titles` (
   `emp_no` int NOT NULL, -- 员工编号列
   `title` varchar(50) NOT NULL, -- 职称列
   `from_date` date NOT NULL, -- 职称生效日期列
-  `to_date` date DEFAULT NULL, -- 职称失效日期列
+  `to_date` date DEFAULT NULL, -- 职称失效日期列，若为9999-01-01则表示职称仍在生效
   PRIMARY KEY (`emp_no`,`title`,`from_date`),
   CONSTRAINT `titles_ibfk_1` FOREIGN KEY (`emp_no`) REFERENCES `employees` (`emp_no`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
